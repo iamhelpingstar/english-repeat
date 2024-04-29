@@ -164,3 +164,49 @@ So can we rescale the gradient so that this doesn't happen? What if we instead i
 그렇다면 이런 일이 발생하지 않도록 그래디언트의 스케일을 다시 조정할 수 있을까요? 대신 이 문제를 반복적으로 해결하고 선형화된 목표를 최대화하되 분포가 너무 많이 변하지 않는다는 제약 조건을 적용하면 어떨까요?
 
 * subject to : ~을 조건으로
+
+
+So if you have an interest in reinforcement learning theory, in understanding how and why to design algorithms in a certain way, and if you just want to get more in-depth knowledge about policy gradients, this is the lecture for you.
+
+따라서 강화 학습 이론에 관심이 있고, 알고리즘을 특정 방식으로 설계하는 방법과 이유를 이해하고, 정책 그래디언트에 대해 더 깊이 있는 지식을 얻고자 한다면 이 강의가 적합합니다.
+
+So one of the ways that we can think of policy gradient more conceptually, so there was this kind of REINFORCE method on the previous slide, which is a particular instance of policy gradient.
+
+그래서 정책 그래디언트를 좀 더 개념적으로 생각할 수 있는 방법 중 하나가 이전 슬라이드에 REINFORCE라는 방법이 있었는데, 이것이 정책 그래디언트의 구체적인 예시입니다.
+
+And we covered the policy iteration algorithm when we discussed value-based methods, primarily as a way to set the stage for what will come next, which was Q-learning.
+
+그리고 가치 기반 방법을 논의할 때 정책 반복 알고리즘을 다루었는데, 이는 주로 다음 단계인 Q 러닝을 위한 준비 단계였습니다.
+
+And that might be desirable if you think that your advantage estimator is not perfect.
+
+어드벤티지 추정기가 완벽하지 않다고 생각한다면 그렇게 하는 것이 바람직할 수도 있습니다.
+
+So what I would like to do is I would like to write this sum essentially as a bunch of terms that look a little bit like advantages.
+
+그래서 제가 하고 싶은 것은 이 총합을 본질적으로 어드벤티지처럼 보이는 용어들로 묶어서 쓰고 싶다는 것입니다.
+
+![alt text](images/lec_9_05.png)
+
+So what does this all have to do with policy gradients?
+
+그렇다면 이 모든 것이 정책 그래디언트와 어떤 관련이 있을까요?
+
+Because remember, we could get policy gradient just by differentiating an equation very similar to this with respect to θ' at the value θ equals θ'.
+
+왜냐하면 θ가 θ'라는 값에서 이와 매우 유사한 방정식을 θ'에 대해 미분하면 정책 그래디언트를 얻을 수 있다는 것을 기억하세요.
+
+![alt text](images/lec_9_06.png)
+
+Essentially, we need to somehow ignore the fact that we need to use state sampling from $p_{θ'}(s_t)$ and instead get away with using state sampling from $p_θ(s_t)$.
+
+기본적으로 $p_{θ'}(s_t)$에서 상태 샘플링을 사용해야 한다는 사실을 어떻게든 무시하고 대신 $p_θ(s_t)$에서 상태 샘플링을 사용해야 한다는 사실에서 벗어나야 합니다.
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$', '$']]},
+    messageStyle: "none",
+    "HTML-CSS": { availableFonts: "TeX", preferredFont: "TeX" },
+  });
+</script>
