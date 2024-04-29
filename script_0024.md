@@ -113,3 +113,54 @@ Essentially, if you restrict θ' to not go too far from θ so this constraint is
 기본적으로, 만약 θ'를 θ에서 너무 멀어지지 않도록 제한하여 이 제약을 만족시킨다면, 이 다루기 쉬운 목표를 최대화하는 것은 실제 RL 목표를 최대화하는 것과 같습니다.
 
 
+![alt text](images/image-58.png)
+
+We still unfortunately don't have a real gradient, because we're not computing the derivative through this second term, but at least the sample is not correlated.
+
+불행히도 우리는 여전히 실제 그래디언트를 가지고 있지 않습니다, 왜냐하면 우리는 이 두 번째 항을 통한 미분을 계산하지 않고 있기 때문이지만, 적어도 샘플은 상관관계가 없습니다.
+
+But as long as none of the threads hang up, then you'll be okay.
+
+하지만 스레드가 끊어지지 않는 한 괜찮을 것입니다.
+
+Another way to think about it is we can no longer assume that our action came from our latest policy π_θ, so we'll instead learn a state action value function that is valid for any action so that we can train it even using actions that didn't come from π_θ, but then query it using actions from π_θ.
+
+이에 대해 생각하는 또 다른 방법은 우리의 action이 최신 policy π_θ에서 온 것이라고 더 이상 가정할 수 없기 때문에, π_θ에서 오지 않은 action을 사용하여도 훈련할 수 있고, 그런 다음 π_θ에서 온 action을 사용하여 query 할 수 있는, 어떤 action에 대해서도 유효한 state action value function을 대신 학습할 것입니다.
+
+![alt text](images/image-59.png)
+
+And now we'll just plug in this a_i^π into our policy gradient equation and that's now correct because a'_i did in fact come from π_θ so this is in fact an unbiased estimator of expectations under π_θ.
+
+이제 이 a_i^π를 정책 그래디언트 방정식에 대입하면 a'_i가 실제로 π_θ에서 나온 것이므로 실제로는 π_θ 아래의 기대치에 대한 편향되지 않은 추정치이므로 이제 맞습니다.
+
+![alt text](images/image-60.png)
+
+So it has a very similar effect as the discount, which also maybe sheds some light on the role that discounts play in policy gradients.
+
+따라서 할인과 매우 유사한 효과를 내며, 할인이 정책 그래디언트에서 어떤 역할을 하는지도 알 수 있습니다.
+
+And that's in fact what's the case.
+
+그리고 실제로 그것이 사실입니다.
+
+So we have 10,000 total state action pairs, which means that we're going to need to calculate 10,000 of these 1 million length vectors.
+
+우리는 총 10,000개의 state action 쌍을 가지고 있으며, 이는 우리가 1백만 길이의 벡터 10,000개를 계산해야 함을 의미합니다.
+
+So instead of calculating the derivative of the neural net's output with respect to its input, and then multiplying that by the derivative of the loss, we do the opposite. We first calculate the derivative of the loss, and then back propagate it through the neural network using the back propagation algorithm, which is what our automatic differentiation tools will do for us.
+
+신경망의 출력에 대한 입력의 derivative를 계산하고, 그 결과를 손실의 derivative와 곱하는 대신에, 우리는 반대 의 과정을 수행합니다. 우리는 먼저 손실의 derivative를 계산하고, 그것을 역전파 알고리즘을 사용하여 신경망을 통해 역전파합니다. 이는 우리의 자동 미분 도구가 수행할 작업입니다.
+
+We will also have an entire other lecture later on in the course on even more advanced policy gradients materials.
+
+이 과정의 후반부에는 더 고급 정책 그래디언트 자료에 대한 다른 강의도 준비되어 있습니다.
+
+The intuition is that this is a essentially the same problem as optimizing, let's say, a quadratic function where the eigenvalues of the corresponding matrix have a very large ratio. So if you have a quadratic function with some eigenvalues that are very large and some that are very small, then first-order gradient descent methods are really going to struggle in this kind of function.
+
+직관적으로 이것은 해당 행렬의 고유값이 매우 큰 비율을 갖는 이차 함수를 최적화하는 것과 본질적으로 같은 문제라는 것을 알 수 있습니다. 따라서 일부 고유값이 매우 크고 일부 고유값이 매우 작은 이차 함수가 있다면 이런 종류의 함수에서 일차 그래디언트 하강 방법은 정말 어려움을 겪게 될 것입니다.
+
+So can we rescale the gradient so that this doesn't happen? What if we instead iteratively solve this problem, maximize the linearized objective, but subject to a constraint that the distributions don't change too much?
+
+그렇다면 이런 일이 발생하지 않도록 그래디언트의 스케일을 다시 조정할 수 있을까요? 대신 이 문제를 반복적으로 해결하고 선형화된 목표를 최대화하되 분포가 너무 많이 변하지 않는다는 제약 조건을 적용하면 어떨까요?
+
+* subject to : ~을 조건으로
