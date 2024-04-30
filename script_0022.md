@@ -10,13 +10,13 @@ Remember, the way that we got this max was by taking the argmax, which is our po
 
 So inside of that max, you can kind of unpack it.
 
-And pretend that it's actually Q_ϕ of s'_i comma argmax of Q_ϕ, and that argmax is basically our policy.
+And pretend that it's actually Q_ϕ of $s'_i$ comma argmax of Q_ϕ, and that argmax is basically our policy.
 
 So this is the only place where the policy shows up.
 
-And conveniently enough, it shows up as an argument to the Q function, which means that as our policy changes, as our action a'_i changes, we do not need to generate new rollouts.
+And conveniently enough, it shows up as an argument to the Q function, which means that as our policy changes, as our action $a'_i$ changes, we do not need to generate new rollouts.
 
-그리고 편리하게도 Q function에 대한 argument로 표시되므로 policy가 변경되면 액션 a'_i가 변경되므로 새로운 롤아웃을 생성할 필요가 없습니다.
+그리고 편리하게도 Q function에 대한 argument로 표시되므로 policy가 변경되면 액션 $a'_i$가 변경되므로 새로운 롤아웃을 생성할 필요가 없습니다.
 
 You can almost think of this as a kind of model.
 
@@ -26,7 +26,7 @@ Q 함수를 사용하면 다양한 행동을 취했을 때 어떤 값이 나오�
 
 And then, of course, you take the best action if you want to most improve your behavior.
 
-So this max approximates the value of π', our greedy policy, at s'_i.
+So this max approximates the value of π', our greedy policy, at $s'_i$.
 
 And that's why we don't need new samples.
 
@@ -36,7 +36,7 @@ We're basically using our Q function to simulate the value of new actions.
 
 So given a state and an action, the transition is actually independent of π. Right?
 
-If s_i and a_i are fixed, no matter how much we change π, s'_i is not going to change, because π only influences a_i, and here a_i is fixed.
+If s_i and a_i are fixed, no matter how much we change π, $s'_i$ is not going to change, because π only influences a_i, and here a_i is fixed.
 
 So one way that you can think of Fitted Q iteration kind of structurally is that you have this big bucket of different transitions, and what you'll do is you'll back up the values along each of those transitions, and each of those backups will improve your Q value.
 
