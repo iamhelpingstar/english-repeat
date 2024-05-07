@@ -1,7 +1,7 @@
 import re
 
-lecture = "09"
-part = "04"
+lecture = "11"
+part = "01"
 
 filename = f"lec_{lecture}_{part}"
 
