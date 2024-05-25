@@ -1,9 +1,10 @@
 import re
 
+cs = 285
 lecture = "12"
-part = "01"
+part = "03"
 
-filename = f"lec_{lecture}_{part}"
+filename = f"cs{cs}_{lecture}_{part}"
 
 
 # 파일 열기
@@ -19,7 +20,7 @@ content = content.replace("\n\n\n", "\n\n")
 
 content = re.sub(
     r"\[p\.(\d{2})\]",
-    lambda m: f"![{lecture}_{m.group(1)}](images/lec_{lecture}_{m.group(1)}.png)",
+    lambda m: f"![{lecture}_{m.group(1)}](images/cs{cs}_{lecture}_{m.group(1)}.png)",
     content,
 )
 
