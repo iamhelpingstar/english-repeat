@@ -1,7 +1,7 @@
 import fitz
 
 cs = 285
-lecture = "02"
+lecture = "13"
 filename = f"cs{cs}_{lecture}"
 doc = fitz.open(f"pdf/{filename}.pdf")
 for i, page in enumerate(doc):

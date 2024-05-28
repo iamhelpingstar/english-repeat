@@ -1,8 +1,8 @@
 import re
 
 cs = 285
-lecture = "12"
-part = "03"
+lecture = "13"
+part = "01"
 
 filename = f"cs{cs}_{lecture}_{part}"
 
